@@ -1,0 +1,6 @@
+# pnpm Monorepo 工作空间配置
+packages:
+  # 主应用目录
+  - 'apps/*'
+  # 共享包目录
+  - 'packages/*'

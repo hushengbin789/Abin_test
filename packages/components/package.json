@@ -1,0 +1,36 @@
+{
+  "name": "@packages/components",
+  "version": "1.0.0",
+  "description": "共享 Vue 3 组件库",
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    },
+    "./*": {
+      "types": "./src/components/*/index.ts",
+      "import": "./src/components/*/index.ts"
+    }
+  },
+  "scripts": {
+    "typecheck": "vue-tsc --noEmit",
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "vue": "^3.4.0"
+  },
+  "dependencies": {
+    "@packages/types": "workspace:*",
+    "@packages/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.5.2",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "vue": "^3.4.3",
+    "vue-tsc": "^2.0.0"
+  }
+}
