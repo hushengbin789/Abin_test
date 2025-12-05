@@ -22,9 +22,14 @@ vue3-monorepo/
 ├── apps/
 │   └── web/                    # 主应用
 │       ├── src/
+│       │   ├── api/            # API 服务封装
+│       │   ├── mock/           # Mock 数据服务
 │       │   ├── views/          # 页面组件
+│       │   │   ├── Login/      # 登录页面
+│       │   │   ├── Register/   # 注册页面
+│       │   │   └── Profile/    # 个人中心
 │       │   ├── layouts/        # 布局组件
-│       │   ├── router/         # 路由配置
+│       │   ├── router/         # 路由配置（含权限守卫）
 │       │   ├── stores/         # 状态管理
 │       │   └── styles/         # 全局样式
 │       ├── public/             # 静态资源
@@ -297,6 +302,36 @@ refactor: 代码重构
 perf: 性能优化
 test: 测试相关
 chore: 构建/工具相关
+```
+
+## 🔐 登录注册模块
+
+项目内置完整的登录注册功能，包含 Mock 数据支持：
+
+### 测试账号
+
+| 账号 | 密码 | 角色 |
+|------|------|------|
+| admin | 123456 | 管理员 |
+| user | 123456 | 普通用户 |
+
+### 功能特性
+
+- **登录页面** - 支持用户名/邮箱登录，记住登录状态
+- **注册页面** - 表单验证，密码强度检测
+- **个人中心** - 查看用户信息，修改密码
+- **路由守卫** - 自动跳转登录，权限控制
+- **Mock 服务** - 开发环境自动启用，无需后端支持
+
+### Mock API 接口
+
+```typescript
+POST /api/auth/login      // 登录
+POST /api/auth/register   // 注册
+POST /api/auth/logout     // 登出
+GET  /api/user/info       // 获取用户信息
+PUT  /api/user/profile    // 更新用户资料
+PUT  /api/user/password   // 修改密码
 ```
 
 ## 📄 License

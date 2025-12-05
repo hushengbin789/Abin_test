@@ -14,11 +14,14 @@
     "@packages/components": "workspace:*",
     "@packages/types": "workspace:*",
     "@packages/utils": "workspace:*",
+    "axios": "^1.6.2",
+    "mockjs": "^1.1.0",
     "pinia": "^2.1.7",
     "vue": "^3.5.25",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
+    "@types/mockjs": "^1.0.10",
     "@vitejs/plugin-vue": "^4.5.2",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.32",

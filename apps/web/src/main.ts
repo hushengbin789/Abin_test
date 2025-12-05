@@ -13,6 +13,10 @@ import MonorepoComponents from '@packages/components'
 // 导入全局样式
 import './styles/index.css'
 
+// 初始化 Mock 服务（开发环境）
+import { setupMock } from './mock'
+setupMock()
+
 // 创建应用实例
 const app = createApp(App)
 

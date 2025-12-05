@@ -3,30 +3,48 @@
  */
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { UserInfo, LoginParams, LoginResult } from '@packages/types'
+import type {
+  UserInfo,
+  LoginParams,
+  RegisterParams,
+  LoginResult,
+} from '@packages/types'
 import { setStorage, getStorage, removeStorage } from '@packages/utils'
+import {
+  login as loginApi,
+  register as registerApi,
+  logout as logoutApi,
+} from '@/api/auth'
 
 const TOKEN_KEY = 'access_token'
+const REFRESH_TOKEN_KEY = 'refresh_token'
 const USER_KEY = 'user_info'
 
 export const useUserStore = defineStore('user', () => {
   // 状态
   const token = ref<string>(getStorage(TOKEN_KEY, ''))
+  const refreshToken = ref<string>(getStorage(REFRESH_TOKEN_KEY, ''))
   const userInfo = ref<UserInfo | null>(getStorage(USER_KEY, null))
 
   // 计算属性
   const isLoggedIn = computed(() => !!token.value)
   const username = computed(() => userInfo.value?.username || '')
   const avatar = computed(() => userInfo.value?.avatar || '')
-
-  // 操作方法
+  const userRole = computed(() => userInfo.value?.role || '')
 
   /**
    * 设置令牌
    */
-  function setToken(newToken: string) {
-    token.value = newToken
-    setStorage(TOKEN_KEY, newToken, { expires: 7 * 24 * 60 * 60 * 1000 })
+  function setToken(accessToken: string, refresh?: string) {
+    token.value = accessToken
+    setStorage(TOKEN_KEY, accessToken, { expires: 7 * 24 * 60 * 60 * 1000 })
+
+    if (refresh) {
+      refreshToken.value = refresh
+      setStorage(REFRESH_TOKEN_KEY, refresh, {
+        expires: 30 * 24 * 60 * 60 * 1000,
+      })
+    }
   }
 
   /**
@@ -41,39 +59,60 @@ export const useUserStore = defineStore('user', () => {
    * 登录
    */
   async function login(params: LoginParams): Promise<LoginResult> {
-    // 模拟登录接口
-    console.log('登录参数:', params)
+    const response = await loginApi(params)
 
-    // TODO: 替换为真实的登录接口
-    const mockResult: LoginResult = {
-      accessToken: 'mock_token_' + Date.now(),
-      refreshToken: 'mock_refresh_token_' + Date.now(),
-      expiresIn: 7200,
-      userInfo: {
-        id: '1',
-        username: params.account,
-        email: `${params.account}@example.com`,
-        avatar: '',
-        role: 0 as unknown as LoginResult['userInfo']['role'],
-        status: 0 as unknown as LoginResult['userInfo']['status'],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
+    if (response.code !== 0) {
+      throw new Error(response.message || '登录失败')
     }
 
-    setToken(mockResult.accessToken)
-    setUserInfo(mockResult.userInfo)
+    const result = response.data
+    setToken(result.accessToken, result.refreshToken)
+    setUserInfo(result.userInfo)
 
-    return mockResult
+    return result
+  }
+
+  /**
+   * 注册
+   */
+  async function register(params: RegisterParams): Promise<LoginResult> {
+    const response = await registerApi(params)
+
+    if (response.code !== 0) {
+      throw new Error(response.message || '注册失败')
+    }
+
+    const result = response.data
+    setToken(result.accessToken, result.refreshToken)
+    setUserInfo(result.userInfo)
+
+    return result
   }
 
   /**
    * 登出
    */
-  function logout() {
+  async function logout() {
+    try {
+      // 调用登出接口
+      await logoutApi()
+    } catch (error) {
+      console.error('登出接口调用失败:', error)
+    } finally {
+      // 无论接口是否成功，都清除本地状态
+      clearUserState()
+    }
+  }
+
+  /**
+   * 清除用户状态
+   */
+  function clearUserState() {
     token.value = ''
+    refreshToken.value = ''
     userInfo.value = null
     removeStorage(TOKEN_KEY)
+    removeStorage(REFRESH_TOKEN_KEY)
     removeStorage(USER_KEY)
   }
 
@@ -85,19 +124,31 @@ export const useUserStore = defineStore('user', () => {
     console.log('刷新用户信息')
   }
 
+  /**
+   * 检查登录状态
+   */
+  function checkLoginStatus(): boolean {
+    return !!token.value && !!userInfo.value
+  }
+
   return {
     // 状态
     token,
+    refreshToken,
     userInfo,
     // 计算属性
     isLoggedIn,
     username,
     avatar,
+    userRole,
     // 方法
     setToken,
     setUserInfo,
     login,
+    register,
     logout,
+    clearUserState,
     refreshUserInfo,
+    checkLoginStatus,
   }
 })
