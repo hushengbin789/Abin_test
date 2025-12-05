@@ -124,19 +124,96 @@ import type { UserInfo, ApiResponse } from '@packages/types'
 
 ### @packages/utils
 
-工具函数库，包含：
+工具函数库，集成多个常用第三方库：
 
+#### dayjs - 日期处理
+```typescript
+import { 
+  formatDateTime, 
+  getRelativeTimeFromNow, 
+  dateRangePresets,
+  dayjs 
+} from '@packages/utils'
+
+// 格式化日期
+formatDateTime(new Date()) // '2024-01-15 14:30:00'
+
+// 相对时间
+getRelativeTimeFromNow('2024-01-10') // '5 天前'
+
+// 日期范围预设
+const [start, end] = dateRangePresets.last7Days()
+```
+
+#### js-cookie - Cookie 操作
+```typescript
+import { 
+  setCookie, 
+  getCookie, 
+  tokenManager,
+  preferencesManager 
+} from '@packages/utils'
+
+// 基础操作
+setCookie('token', 'abc123', { expires: 7 })
+const token = getCookie('token')
+
+// Token 管理
+tokenManager.setAccessToken('token_value')
+tokenManager.hasValidToken() // true/false
+```
+
+#### lodash - 工具函数
+```typescript
+import { 
+  chunkArray, 
+  uniqueArray, 
+  deepCloneObject,
+  debounceFn,
+  treeUtils 
+} from '@packages/utils'
+
+// 数组操作
+chunkArray([1, 2, 3, 4, 5], 2) // [[1, 2], [3, 4], [5]]
+uniqueArray([1, 2, 2, 3]) // [1, 2, 3]
+
+// 对象操作
+deepCloneObject({ a: { b: 1 } })
+
+// 树形数据
+treeUtils.flatten(treeData)
+treeUtils.find(treeData, node => node.id === 1)
+```
+
+#### qs - 查询字符串
+```typescript
+import { 
+  parseQuery, 
+  stringifyQuery, 
+  buildUrl,
+  createQueryManager 
+} from '@packages/utils'
+
+// 解析
+parseQuery('name=John&age=30') // { name: 'John', age: '30' }
+
+// 序列化
+stringifyQuery({ page: 1, size: 10 }) // 'page=1&size=10'
+
+// 构建 URL
+buildUrl('https://api.example.com/users', { page: 1 })
+
+// 查询参数管理器
+const query = createQueryManager({ page: 1, keyword: '' })
+query.set({ page: 2 })
+query.toString() // 'page=2&keyword='
+```
+
+#### 其他工具
 - 存储工具（setStorage, getStorage 等）
-- 日期处理（formatDate, getRelativeTime 等）
 - 数据验证（isEmail, isMobile 等）
 - 格式化工具（formatMoney, formatFileSize 等）
 - 防抖节流（debounce, throttle 等）
-
-**使用方式：**
-
-```typescript
-import { formatDate, debounce, isEmail } from '@packages/utils'
-```
 
 ### @packages/components
 

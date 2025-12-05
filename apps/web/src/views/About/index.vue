@@ -13,8 +13,14 @@ const packages = [
   },
   {
     name: '@packages/utils',
-    description: '工具函数库，提供常用的工具函数',
-    features: ['存储工具', '日期处理', '数据验证', '格式化', '防抖节流'],
+    description: '工具函数库，集成 dayjs、js-cookie、lodash、qs 等常用库',
+    features: [
+      'dayjs 日期处理',
+      'js-cookie Cookie 操作',
+      'lodash 工具函数',
+      'qs 查询字符串',
+      '存储/验证/格式化',
+    ],
   },
   {
     name: '@packages/components',

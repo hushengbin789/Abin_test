@@ -29,6 +29,14 @@ const routes: RouteRecordRaw[] = [
       title: '组件演示',
     },
   },
+  {
+    path: '/library',
+    name: 'LibraryDemo',
+    component: () => import('@/views/LibraryDemo/index.vue'),
+    meta: {
+      title: '工具库演示',
+    },
+  },
   // 404 页面
   {
     path: '/:pathMatch(.*)*',
