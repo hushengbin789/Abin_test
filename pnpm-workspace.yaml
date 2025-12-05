@@ -1,0 +1,6 @@
+# pnpm 工作区配置
+packages:
+  # 应用层
+  - 'apps/*'
+  # 共享包
+  - 'packages/*'

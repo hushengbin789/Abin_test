@@ -1,0 +1,53 @@
+{
+  "name": "vue3-vite-monorepo",
+  "version": "1.0.0",
+  "description": "Vue3 + TypeScript + Vite Monorepo 全生态项目",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@8.15.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm -r --parallel run dev",
+    "dev:web": "pnpm --filter @monorepo/web dev",
+    "dev:admin": "pnpm --filter @monorepo/admin dev",
+    "build": "pnpm -r run build",
+    "build:web": "pnpm --filter @monorepo/web build",
+    "build:admin": "pnpm --filter @monorepo/admin build",
+    "preview": "pnpm -r --parallel run preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx --fix",
+    "format": "prettier --write \"**/*.{js,ts,vue,json,md}\"",
+    "type-check": "pnpm -r run type-check",
+    "clean": "pnpm -r run clean && rimraf node_modules",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "@vitejs/plugin-vue": "^4.5.0",
+    "@vitejs/plugin-vue-jsx": "^3.1.0",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-vue": "^9.19.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.0",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.2",
+    "vite": "^5.0.5",
+    "vue-tsc": "^2.0.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,vue}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  }
+}

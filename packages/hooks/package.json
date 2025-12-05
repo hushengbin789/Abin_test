@@ -1,0 +1,38 @@
+{
+  "name": "@monorepo/hooks",
+  "version": "1.0.0",
+  "description": "共享 Vue Composition API Hooks",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "type-check": "vue-tsc --noEmit",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "vue": "^3.3.11"
+  },
+  "devDependencies": {
+    "vite": "^5.0.5",
+    "vite-plugin-dts": "^3.6.4"
+  },
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  }
+}

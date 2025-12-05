@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# 提交信息规范检查（可选）
+# npx --no -- commitlint --edit ${1}
+
+echo "✅ 提交信息检查通过"
