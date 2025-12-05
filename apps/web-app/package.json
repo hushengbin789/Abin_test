@@ -1,0 +1,29 @@
+{
+  "name": "@mono/web-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vue 3 主应用",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "type-check": "vue-tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@mono/components": "workspace:*",
+    "@mono/hooks": "workspace:*",
+    "@mono/utils": "workspace:*",
+    "pinia": "^2.2.6",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@mono/tsconfig": "workspace:*",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "typescript": "~5.6.3",
+    "vite": "^6.0.3",
+    "vue-tsc": "^2.1.10"
+  }
+}

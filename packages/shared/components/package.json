@@ -1,0 +1,41 @@
+{
+  "name": "@mono/components",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vue 3 组件库",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./style.css": "./dist/index.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "type-check": "vue-tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@mono/utils": "workspace:*",
+    "@mono/hooks": "workspace:*"
+  },
+  "peerDependencies": {
+    "vue": ">=3.4.0"
+  },
+  "devDependencies": {
+    "@mono/tsconfig": "workspace:*",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.0.3",
+    "vite-plugin-dts": "^4.3.0",
+    "vue": "^3.5.13",
+    "vue-tsc": "^2.1.10"
+  }
+}

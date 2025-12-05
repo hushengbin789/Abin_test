@@ -1,0 +1,10 @@
+{
+  "extends": "@mono/tsconfig/vue-lib.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "baseUrl": "."
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

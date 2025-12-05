@@ -1,0 +1,13 @@
+{
+  "name": "@mono/eslint-config",
+  "version": "1.0.0",
+  "private": true,
+  "description": "共享的 ESLint 配置",
+  "main": "index.cjs",
+  "files": [
+    "*.cjs"
+  ],
+  "peerDependencies": {
+    "eslint": ">=8.0.0"
+  }
+}

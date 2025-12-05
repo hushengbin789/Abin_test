@@ -1,0 +1,9 @@
+{
+  "name": "@mono/tsconfig",
+  "version": "1.0.0",
+  "private": true,
+  "description": "共享的 TypeScript 配置",
+  "files": [
+    "*.json"
+  ]
+}

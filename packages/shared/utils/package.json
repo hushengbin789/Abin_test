@@ -1,0 +1,29 @@
+{
+  "name": "@mono/utils",
+  "version": "1.0.0",
+  "private": true,
+  "description": "共享工具函数库",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@mono/tsconfig": "workspace:*",
+    "tsup": "^8.3.5"
+  }
+}

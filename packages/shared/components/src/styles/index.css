@@ -1,0 +1,103 @@
+/**
+ * 组件库样式
+ * 定义 CSS 变量和基础样式
+ */
+
+:root {
+  /* 主色调 */
+  --mono-primary-color: #409eff;
+  --mono-primary-color-light: #66b1ff;
+  --mono-primary-color-dark: #3a8ee6;
+
+  /* 状态色 */
+  --mono-success-color: #67c23a;
+  --mono-warning-color: #e6a23c;
+  --mono-danger-color: #f56c6c;
+  --mono-info-color: #909399;
+
+  /* 中性色 */
+  --mono-text-primary: #303133;
+  --mono-text-regular: #606266;
+  --mono-text-secondary: #909399;
+  --mono-text-placeholder: #c0c4cc;
+
+  /* 边框色 */
+  --mono-border-color: #dcdfe6;
+  --mono-border-color-light: #e4e7ed;
+  --mono-border-color-lighter: #ebeef5;
+
+  /* 背景色 */
+  --mono-bg-color: #ffffff;
+  --mono-bg-color-page: #f2f3f5;
+  --mono-bg-color-overlay: rgba(0, 0, 0, 0.5);
+
+  /* 圆角 */
+  --mono-border-radius: 4px;
+  --mono-border-radius-small: 2px;
+  --mono-border-radius-large: 8px;
+
+  /* 阴影 */
+  --mono-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  --mono-box-shadow-light: 0 2px 8px 0 rgba(0, 0, 0, 0.06);
+
+  /* 过渡 */
+  --mono-transition-duration: 0.3s;
+
+  /* 字体大小 */
+  --mono-font-size-small: 12px;
+  --mono-font-size-base: 14px;
+  --mono-font-size-medium: 16px;
+  --mono-font-size-large: 18px;
+}
+
+/* 基础重置 */
+.mono-component {
+  box-sizing: border-box;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+}
+
+/* 动画 */
+@keyframes mono-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mono-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes mono-slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes mono-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
